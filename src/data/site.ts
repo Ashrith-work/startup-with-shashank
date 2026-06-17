@@ -116,7 +116,7 @@ export const contact = {
   eyebrow: "Get in touch",
   heading: "Questions? Talk to us.",
   body: "Course help, collaborations, or press — drop us a line and we'll get back to you.",
-  email: "hello@startupwithshashank.com", // <<< swap for the real inbox >>>
+  email: "ashrith@socialhippi.com",
   instagram: "https://www.instagram.com/startupwithshashank/",
 };
 
