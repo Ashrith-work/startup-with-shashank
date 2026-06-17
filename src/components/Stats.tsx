@@ -12,7 +12,7 @@ export default function Stats() {
               key={s.label}
               value={s.value}
               suffix={s.suffix}
-              decimal={"decimal" in s ? s.decimal : false}
+              decimal={Boolean((s as { decimal?: boolean }).decimal)}
               label={s.label}
             />
           ))}
