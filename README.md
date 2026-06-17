@@ -4,6 +4,8 @@ A production-ready, single-scroll marketing site for **StartupWithShashank** (fo
 education in Telugu). Vite + React + TypeScript, Tailwind, Framer Motion, lucide-react.
 Fully static — deploys to Vercel with zero config.
 
+**Live:** https://startup-with-shashank.vercel.app · auto-deploys from `main` via Vercel↔GitHub.
+
 ## Develop
 
 ```bash
