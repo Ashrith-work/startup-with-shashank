@@ -88,11 +88,10 @@ export const why = {
   ],
 };
 
-// PLACEHOLDER stats — swap the numbers/labels for the real Instagram figures.
 export const stats = [
-  { label: "Followers", value: 120, suffix: "k+" },
-  { label: "Posts", value: 1200, suffix: "+" },
-  { label: "Avg rating / 5", value: 4.9, suffix: "", decimal: true },
+  { label: "Followers", value: 85, suffix: "k" },
+  { label: "Posts", value: 540, suffix: "" },
+  { label: "Reels", value: 320, suffix: "" },
 ];
 
 // PLACEHOLDER reels — each opens in the hero-style video popup. Replace the
