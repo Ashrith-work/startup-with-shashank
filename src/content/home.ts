@@ -50,7 +50,15 @@ export interface HomeContent {
     rotating: string[];
     teluguSubline: string;
     instagram: string;
-    video: { videoId: string; caption: string };
+    video: {
+      /** Self-hosted MP4 (recommended for a clean full-screen cinematic look). */
+      mp4: string;
+      /** Optional poster shown while the MP4 loads. */
+      poster?: string;
+      /** YouTube fallback id (used if `mp4` is empty or fails to load). */
+      videoId: string;
+      caption: string;
+    };
   };
   categories: Category[];
   podcast: { title: string; subtitle: string; episodes: Episode[] };
@@ -94,8 +102,14 @@ export const home: HomeContent = {
     // TODO: confirm exact wording with Shashank / a native speaker before shipping.
     teluguSubline: "కాలేజీలో నేర్పించని స్కిల్స్",
     instagram: "https://www.instagram.com/startupwithshashank/",
-    // YouTube Short played in the hero popup.
-    video: { videoId: "yhdE_7azl2A", caption: "Introducing Shashank Sivapurapu" },
+    // Cinematic intro video. Drop a file at public/intro.mp4 to self-host it;
+    // until then it falls back to the YouTube Short below.
+    video: {
+      mp4: "/intro.mp4",
+      poster: "",
+      videoId: "yhdE_7azl2A",
+      caption: "Introducing Shashank Sivapurapu",
+    },
   },
 
   // Real ventures with real imagery (public/images/*). Add only what's real.

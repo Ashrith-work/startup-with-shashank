@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, Volume2, VolumeX, X } from "lucide-react";
@@ -7,19 +7,24 @@ import { home } from "../content/home";
 const SEEN_KEY = "sws-intro-seen";
 
 /**
- * Full-screen cinematic intro: the YouTube Short auto-plays on load, cropped to
- * fill the whole viewport, with a slow fade-in + gentle continuous Ken Burns
- * zoom and a dark legibility gradient.
- * - Muted autoplay (browsers require it) with a tap-to-unmute toggle. The iframe
- *   is re-keyed on mute change so a user gesture can start sound.
- * - "Enter" / Close / Esc dismiss it; the iframe unmounts so audio stops.
- * - Shows once per browser session. Respects prefers-reduced-motion.
+ * Full-screen cinematic intro shown once per browser session.
+ * - Plays a self-hosted MP4 (native <video>, object-cover) for a clean,
+ *   chrome-free full-bleed look. Falls back to the YouTube Short if `mp4` is
+ *   empty or the file fails to load.
+ * - Slow fade-in + gentle continuous Ken Burns zoom + dark legibility gradient.
+ * - Muted autoplay (browsers require it) with a tap-to-unmute toggle.
+ * - "Enter" / Close / Esc dismiss it; media unmounts so audio stops.
+ * - Respects prefers-reduced-motion.
  */
 export default function CinematicPopup() {
-  const { videoId, caption } = home.hero.video;
+  const { mp4, poster, videoId, caption } = home.hero.video;
   const [open, setOpen] = useState(false);
   const [muted, setMuted] = useState(true);
+  const [mp4Failed, setMp4Failed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const reduce = useReducedMotion();
+
+  const usingMp4 = Boolean(mp4) && !mp4Failed;
 
   // Auto-open once per session, after a short beat.
   useEffect(() => {
@@ -35,6 +40,7 @@ export default function CinematicPopup() {
   }, []);
 
   const close = () => {
+    if (usingMp4) videoRef.current?.pause();
     setOpen(false);
     try {
       sessionStorage.setItem(SEEN_KEY, "1");
@@ -43,7 +49,7 @@ export default function CinematicPopup() {
     }
   };
 
-  // Esc to close + lock body scroll while open.
+  // Esc / Enter to close + lock body scroll while open.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -57,10 +63,35 @@ export default function CinematicPopup() {
     };
   }, [open]);
 
-  const src =
+  const toggleMute = () => {
+    const next = !muted;
+    setMuted(next);
+    const v = videoRef.current;
+    if (usingMp4 && v) {
+      v.muted = next;
+      if (!next) void v.play().catch(() => undefined);
+    }
+    // For the YouTube fallback, the iframe is re-keyed on `muted` below so the
+    // user gesture can start sound.
+  };
+
+  const ytSrc =
     `https://www.youtube.com/embed/${videoId}` +
     `?autoplay=1&mute=${muted ? 1 : 0}&loop=1&playlist=${videoId}` +
     `&controls=0&rel=0&playsinline=1&modestbranding=1&iv_load_policy=3`;
+
+  const zoom = reduce
+    ? {}
+    : {
+        initial: { scale: 1.05 },
+        animate: { scale: 1.14 },
+        transition: {
+          duration: 18,
+          ease: "easeInOut" as const,
+          repeat: Infinity,
+          repeatType: "reverse" as const,
+        },
+      };
 
   return createPortal(
     <AnimatePresence>
@@ -75,25 +106,30 @@ export default function CinematicPopup() {
           aria-modal="true"
           aria-label={caption}
         >
-          {/* Video cover layer with a slow, continuous cinematic zoom. */}
-          <motion.div
-            className="absolute inset-0"
-            initial={reduce ? false : { scale: 1.05 }}
-            animate={reduce ? undefined : { scale: 1.14 }}
-            transition={{
-              duration: 18,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          >
-            <iframe
-              key={muted ? "muted" : "unmuted"}
-              className="cinematic-media"
-              src={src}
-              title={caption}
-              allow="autoplay; encrypted-media; picture-in-picture"
-            />
+          {/* Media cover layer with a slow, continuous cinematic zoom. */}
+          <motion.div className="absolute inset-0" {...zoom}>
+            {usingMp4 ? (
+              <video
+                ref={videoRef}
+                className="absolute inset-0 h-full w-full object-cover"
+                autoPlay
+                muted={muted}
+                loop
+                playsInline
+                poster={poster || undefined}
+                onError={() => setMp4Failed(true)}
+              >
+                <source src={mp4} type="video/mp4" />
+              </video>
+            ) : (
+              <iframe
+                key={muted ? "muted" : "unmuted"}
+                className="cinematic-media"
+                src={ytSrc}
+                title={caption}
+                allow="autoplay; encrypted-media; picture-in-picture"
+              />
+            )}
           </motion.div>
 
           {/* Dark legibility gradient. */}
@@ -113,7 +149,7 @@ export default function CinematicPopup() {
               </span>
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => setMuted((m) => !m)}
+                  onClick={toggleMute}
                   aria-label={muted ? "Unmute" : "Mute"}
                   aria-pressed={!muted}
                   className="inline-flex h-10 items-center gap-1.5 rounded-full border border-white/20 bg-black/30 px-4 text-sm font-semibold text-fg backdrop-blur transition hover:bg-black/50"
