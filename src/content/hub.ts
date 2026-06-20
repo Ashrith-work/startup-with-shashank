@@ -46,6 +46,7 @@ export interface Hub {
     ctas: { primary: CtaLink; secondary: CtaLink };
     videoMp4: string; // PREFERRED — 16:9 muted loop; falls back to youtubeId
     youtubeId: string; // fallback (current id is a vertical Short)
+    poster: string; // still shown behind/while the video loads
   };
   rows: Row[];
   footer: {
@@ -77,6 +78,7 @@ export const hub: Hub = {
     },
     videoMp4: "/hero.mp4", // drop a 16:9 muted loop here; until then the Short below is used
     youtubeId: "yhdE_7azl2A", // real Shashank Short (vertical → shows as a centered column)
+    poster: "/images/collage.jpg",
   },
 
   rows: [
@@ -105,7 +107,7 @@ export const hub: Hub = {
           label: "Book",
           blurb: "TODO — the book, in one line.",
           href: "#",
-          image: "/images/book.jpg",
+          image: "/images/portrait.jpg",
           gradient: "amber",
           badge: "Soon",
           newTab: false,

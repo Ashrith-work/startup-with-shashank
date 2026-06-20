@@ -18,6 +18,7 @@ export default function Billboard() {
       <VideoBackground
         mp4={h.videoMp4}
         youtubeId={h.youtubeId}
+        poster={h.poster}
         fallback={HERO_FALLBACK}
       />
 

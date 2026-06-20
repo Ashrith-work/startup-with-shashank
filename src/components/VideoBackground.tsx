@@ -64,6 +64,16 @@ export default function VideoBackground({
         style={{ background: fallback }}
       />
 
+      {/* z0 poster still (over the gradient, behind the media) */}
+      {poster && (
+        <img
+          aria-hidden
+          src={poster}
+          alt=""
+          className="absolute inset-0 z-0 h-full w-full object-cover"
+        />
+      )}
+
       {/* z1 media */}
       {usingMp4 ? (
         <video
