@@ -27,12 +27,12 @@ body {
   margin: 0;
   background-color: #0a0a0a;
   color: #ffffff;
-  font-family: "Satoshi", system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Full-screen cinematic video cover (vertical Short cropped to viewport). */
+/* Full-bleed video cover (sized to fill the billboard, crops overflow). */
 .cinematic-media {
   position: absolute;
   top: 50%;

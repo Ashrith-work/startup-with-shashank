@@ -1,25 +1,19 @@
 import Nav from "./components/Nav";
-import Hero from "./components/Hero";
-import PodcastStrip from "./components/PodcastStrip";
-import FlagshipCourse from "./components/FlagshipCourse";
-import StoryStats from "./components/StoryStats";
+import Billboard from "./components/Billboard";
+import Row from "./components/Row";
 import Footer from "./components/Footer";
-import FloatingCTA from "./components/FloatingCTA";
-import CinematicPopup from "./components/CinematicPopup";
+import { hub } from "./content/hub";
 
 export default function App() {
   return (
     <>
-      <CinematicPopup />
       <Nav />
-      <main>
-        <Hero />
-        <PodcastStrip />
-        <FlagshipCourse />
-        <StoryStats />
+      <Billboard />
+      <main className="pb-10">
+        <Row row={hub.rows[0]} id="learn" />
+        <Row row={hub.rows[1]} id="companies" />
       </main>
       <Footer />
-      <FloatingCTA />
     </>
   );
 }
