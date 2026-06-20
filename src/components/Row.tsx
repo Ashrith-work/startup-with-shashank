@@ -1,21 +1,64 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Row as RowType } from "../content/hub";
 import VentureCard from "./VentureCard";
 
 /**
- * A titled horizontal rail of poster cards. Vertical padding gives the
- * hover-zoom room (overflow-x:auto clips overflow-y). Desktop hover arrows
- * scroll by ~0.8 viewport.
+ * Titled horizontal rail of poster cards. Vertical padding gives the zoom room
+ * (overflow-x:auto clips overflow-y).
+ * - Desktop: hover arrows scroll by ~0.8 viewport; cards zoom on hover.
+ * - Touch: the card centered in the rail is marked `active` so it auto-zooms as
+ *   you scroll (no tap needed).
  */
 export default function Row({ row, id }: { row: RowType; id?: string }) {
   const rail = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const scroll = (dir: number) => {
     const el = rail.current;
     if (el) el.scrollBy({ left: dir * 0.8 * el.clientWidth, behavior: "smooth" });
   };
+
+  // On touch devices, track which card is centered so it can auto-zoom.
+  useEffect(() => {
+    const el = rail.current;
+    if (!el) return;
+    const isTouch = window.matchMedia(
+      "(hover: none), (pointer: coarse)"
+    ).matches;
+    if (!isTouch) return;
+
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      Array.from(el.children).forEach((c, i) => {
+        const node = c as HTMLElement;
+        const cc = node.offsetLeft + node.offsetWidth / 2;
+        const d = Math.abs(cc - center);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      setActiveIndex(best);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    update();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
     <motion.section
@@ -41,12 +84,13 @@ export default function Row({ row, id }: { row: RowType; id?: string }) {
       <div
         ref={rail}
         className="flex gap-2 overflow-x-auto scroll-smooth px-5 py-[54px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-12"
-        style={{ scrollSnapType: "x mandatory", scrollPaddingLeft: "20px" }}
+        style={{ scrollSnapType: "x mandatory" }}
       >
         {row.items.map((item, i) => (
           <VentureCard
             key={item.label}
             item={item}
+            active={activeIndex === i}
             position={
               i === 0 ? "first" : i === row.items.length - 1 ? "last" : "mid"
             }

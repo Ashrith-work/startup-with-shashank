@@ -4,7 +4,7 @@ import { hub } from "../content/hub";
 import VideoBackground from "./VideoBackground";
 
 const HERO_FALLBACK =
-  "radial-gradient(75% 80% at 72% 28%,#3a2566,#1b1033 42%,#0A0A0A 82%)";
+  "radial-gradient(75% 80% at 72% 28%,#2c3a16,#161a0e 42%,#0B0C0A 82%)";
 
 export default function Billboard() {
   const h = hub.hero;
@@ -26,7 +26,7 @@ export default function Billboard() {
         className="pointer-events-none absolute inset-0 z-20"
         style={{
           background:
-            "radial-gradient(60% 60% at 75% 30%, rgba(255,107,53,.16), transparent 60%)," +
+            "radial-gradient(60% 60% at 75% 30%, rgba(198,242,78,.14), transparent 60%)," +
             "linear-gradient(180deg, rgba(10,10,10,.15) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,.92) 100%)," +
             "linear-gradient(90deg, rgba(10,10,10,.75) 0%, rgba(10,10,10,0) 55%)," +
             "rgba(10,10,10,.28)",

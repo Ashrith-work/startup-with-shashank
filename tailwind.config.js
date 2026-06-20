@@ -4,14 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#0A0A0A", // page canvas (near-black)
-        surface: "#141414", // elevated cards
-        line: "#242424", // hairline borders
+        bg: "#0B0C0A", // charcoal canvas
+        surface: "#151711", // elevated cards
+        line: "#23261D", // hairline borders
         nav: "#F6F6F4", // (unused here)
-        fg: "#FFFFFF", // primary text on dark
-        muted: "#8A8A8A", // de-emphasized text
-        dim: "#5E5E5E", // captions / legal
-        accent: "#FF6B35", // warm orange, brand
+        fg: "#F2F5EC", // primary text
+        muted: "#9AA08C", // de-emphasized text
+        dim: "#6A6F5E", // captions / legal
+        accent: "#C6F24E", // electric lime, brand
       },
       borderRadius: {
         card: "8px", // Netflix-ish
