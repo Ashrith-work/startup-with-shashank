@@ -5,10 +5,12 @@ import FlagshipCourse from "./components/FlagshipCourse";
 import StoryStats from "./components/StoryStats";
 import Footer from "./components/Footer";
 import FloatingCTA from "./components/FloatingCTA";
+import CinematicPopup from "./components/CinematicPopup";
 
 export default function App() {
   return (
     <>
+      <CinematicPopup />
       <Nav />
       <main>
         <Hero />
