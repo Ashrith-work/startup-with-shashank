@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --accent: #c6f24e;
+  --accent: #e11d48;
 }
 
 html {
@@ -25,8 +25,8 @@ body {
 
 body {
   margin: 0;
-  background-color: #0b0c0a;
-  color: #f2f5ec;
+  background-color: #0b0809;
+  color: #f6eeec;
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

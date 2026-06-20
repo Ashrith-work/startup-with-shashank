@@ -53,7 +53,7 @@ export default function Nav() {
           ))}
           <a
             href={ctaHref}
-            className="rounded-full bg-accent px-5 py-2 text-sm font-bold text-bg transition hover:brightness-110"
+            className="rounded-full bg-accent px-5 py-2 text-sm font-bold text-fg transition hover:brightness-110"
           >
             {cta}
           </a>
@@ -86,7 +86,7 @@ export default function Nav() {
             <a
               href={ctaHref}
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-full bg-accent px-5 py-2.5 text-center font-bold text-bg"
+              className="mt-2 rounded-full bg-accent px-5 py-2.5 text-center font-bold text-fg"
             >
               {cta}
             </a>

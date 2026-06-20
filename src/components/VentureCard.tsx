@@ -61,14 +61,14 @@ export default function VentureCard({
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
 
       {item.badge && (
-        <span className="absolute left-2.5 top-2.5 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold text-bg">
+        <span className="absolute left-2.5 top-2.5 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold text-fg">
           {item.badge}
         </span>
       )}
 
       <span
         className={`absolute right-2.5 top-2.5 inline-flex h-7 w-7 items-center justify-center rounded-full backdrop-blur transition ${
-          zoomed ? "rotate-45 bg-accent text-bg" : "bg-black/50 text-fg"
+          zoomed ? "rotate-45 bg-accent text-fg" : "bg-black/50 text-fg"
         }`}
       >
         <ArrowUpRight size={15} />
