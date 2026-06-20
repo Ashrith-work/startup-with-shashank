@@ -4,19 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#0B0C10",
-        cream: "#F5F3EF",
-        accent: "var(--accent)",
+        bg: "#0A0A0A", // page canvas (near-black)
+        surface: "#141414", // elevated cards / strips
+        nav: "#F6F6F4", // light top nav over dark body
+        ink: "#0A0A0A", // text on the light nav
+        fg: "#FFFFFF", // primary text on dark
+        muted: "#9A9A9A", // de-emphasized text
+        dim: "#6B6B6B", // captions / footer
+        accent: "#E5484D", // single CTA accent
       },
-      fontFamily: {
-        display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
-        body: ['"Inter"', "system-ui", "sans-serif"],
-      },
-      borderColor: {
-        hairline: "rgba(255,255,255,.09)",
+      borderRadius: {
+        card: "14px",
       },
       maxWidth: {
-        container: "1200px",
+        content: "1200px",
+      },
+      fontSize: {
+        hero: ["clamp(2.5rem, 6vw, 5rem)", { lineHeight: "1.05" }],
+        "section-title": ["clamp(1.75rem, 4vw, 3rem)", { lineHeight: "1.1" }],
+      },
+      fontFamily: {
+        display: ["Satoshi", "system-ui", "sans-serif"],
+        body: ["Satoshi", "system-ui", "sans-serif"],
       },
     },
   },

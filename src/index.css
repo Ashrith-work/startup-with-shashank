@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 :root {
-  /* Swappable brand accent — overridden at runtime from brand.accent in main.tsx */
-  --accent: #f5a623;
+  --accent: #e5484d;
 }
 
 html {
@@ -17,42 +16,23 @@ html {
   }
 }
 
+/* Guard against accidental horizontal scroll on phones. */
 html,
 body {
-  /* Belt-and-braces guard against accidental horizontal scroll on phones
-     (e.g. a glow/decoration that spills past the viewport edge). */
   max-width: 100%;
   overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  background-color: #0b0c10;
-  color: #f5f3ef;
-  font-family: "Inter", system-ui, sans-serif;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: "Satoshi", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Lock body scroll while the intro overlay is showing */
-body.intro-locked {
-  overflow: hidden;
-}
-
-/* --- Full-screen intro video cover (vertical Short cropped to viewport) --- */
-.intro-media {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: max(100vw, 177.78vh);
-  height: max(100vh, 56.25vw);
-  pointer-events: none;
-  border: 0;
-  object-fit: cover;
-}
-
-/* Accessible focus ring that respects the brand accent */
+/* Accessible focus ring on the brand accent. */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;

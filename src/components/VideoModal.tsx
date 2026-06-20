@@ -11,10 +11,9 @@ interface VideoModalProps {
 }
 
 /**
- * Centered video popup that autoplays a YouTube Short.
- * - Esc to close, click-outside to close, close button.
- * - Playback is stopped on close because the iframe is unmounted entirely when
- *   `open` is false (no lingering audio).
+ * Centered popup that autoplays a YouTube Short (9:16). Esc / click-outside /
+ * close button dismiss it. The iframe is unmounted when closed so playback (and
+ * audio) stops completely.
  */
 export default function VideoModal({
   open,
@@ -22,7 +21,6 @@ export default function VideoModal({
   title = "Video",
   onClose,
 }: VideoModalProps) {
-  // Esc to close + lock body scroll while open.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -40,8 +38,8 @@ export default function VideoModal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center p-6"
-          style={{ zIndex: 9999, background: "rgba(0,0,0,.9)" }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-6"
+          style={{ background: "rgba(0,0,0,.9)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -62,16 +60,15 @@ export default function VideoModal({
           >
             <button
               onClick={onClose}
-              className="absolute -top-11 right-0 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition hover:text-cream/70"
+              className="absolute -top-11 right-0 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition hover:text-muted"
               aria-label="Close video"
             >
               <X size={16} /> Close
             </button>
             <div
-              className="overflow-hidden rounded-2xl bg-black shadow-2xl"
+              className="overflow-hidden rounded-card bg-black shadow-2xl"
               style={{ aspectRatio: "9 / 16" }}
             >
-              {/* Unmounted when closed → playback stops. */}
               <iframe
                 className="h-full w-full border-0"
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`}
