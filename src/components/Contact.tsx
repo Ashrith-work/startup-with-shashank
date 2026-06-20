@@ -5,7 +5,7 @@ import Section from "./Section";
 export default function Contact() {
   return (
     <Section id="contact">
-      <div className="rounded-3xl border border-hairline bg-white/[0.02] px-6 py-14 sm:px-12">
+      <div className="rounded-3xl border border-hairline bg-white/[0.02] px-6 py-10 sm:px-12 sm:py-14">
         <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
@@ -27,11 +27,11 @@ export default function Contact() {
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/20">
                 <Mail size={20} />
               </span>
-              <span>
+              <span className="min-w-0">
                 <span className="block text-xs uppercase tracking-wide text-cream/50">
                   Email us
                 </span>
-                <span className="font-display text-lg font-bold">
+                <span className="block break-all font-display text-base font-bold sm:text-lg">
                   {contact.email}
                 </span>
               </span>

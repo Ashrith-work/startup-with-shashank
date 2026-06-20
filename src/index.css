@@ -17,6 +17,14 @@ html {
   }
 }
 
+html,
+body {
+  /* Belt-and-braces guard against accidental horizontal scroll on phones
+     (e.g. a glow/decoration that spills past the viewport edge). */
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background-color: #0b0c10;

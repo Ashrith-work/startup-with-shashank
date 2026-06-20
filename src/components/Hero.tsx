@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[88vh] items-center justify-center overflow-hidden pt-20"
+      className="relative flex min-h-[88vh] items-center justify-center overflow-hidden pt-24 sm:pt-20"
     >
       {/* soft radial accent glow */}
       <div
@@ -44,7 +44,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05 }}
-          className="mx-auto max-w-4xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl"
+          className="mx-auto max-w-4xl font-display text-[1.95rem] font-extrabold leading-[1.1] tracking-tight sm:text-6xl sm:leading-[1.05]"
         >
           {lead}
           {hasAccent && <span className="text-accent">{headlineAccent}</span>}
@@ -54,7 +54,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-cream/75"
+          className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-cream/75 sm:text-lg"
         >
           {hero.sub}
         </motion.p>
@@ -63,17 +63,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center"
         >
           <a
             href={hero.primaryCta.url}
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 font-semibold text-ink shadow-lg shadow-accent/20 transition hover:brightness-95"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 font-semibold text-ink shadow-lg shadow-accent/20 transition hover:brightness-95"
           >
             {hero.primaryCta.label} <ArrowRight size={18} />
           </a>
           <a
             href={hero.secondaryCta.url}
-            className="inline-flex items-center gap-2 rounded-full border border-hairline px-7 py-3 font-semibold transition hover:border-white/30 hover:bg-white/5"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-hairline px-7 py-3 font-semibold transition hover:border-white/30 hover:bg-white/5"
           >
             {hero.secondaryCta.label}
           </a>
@@ -84,7 +84,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
-          className="mx-auto mt-14 max-w-3xl"
+          className="mx-auto mt-10 max-w-3xl sm:mt-14"
         >
           <button
             type="button"
@@ -111,7 +111,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="mt-14 inline-flex flex-col items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-cream/50 transition hover:text-cream/80"
+          className="mt-10 inline-flex flex-col items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-cream/50 transition hover:text-cream/80 sm:mt-14"
         >
           Uncover what's next
           <motion.span

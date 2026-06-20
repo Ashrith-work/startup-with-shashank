@@ -172,7 +172,7 @@ export default function Intro({ onDismiss }: { onDismiss: () => void }) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.6 }}
-                className="max-w-3xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl"
+                className="max-w-3xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-tight sm:text-6xl sm:leading-[1.05]"
               >
                 {intro.headline}
               </motion.h1>
@@ -180,7 +180,7 @@ export default function Intro({ onDismiss }: { onDismiss: () => void }) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.35, duration: 0.6 }}
-                className="mt-5 max-w-xl text-base text-cream/80 sm:text-lg"
+                className="mt-4 max-w-xl text-sm text-cream/80 sm:mt-5 sm:text-lg"
               >
                 {intro.sub}
               </motion.p>
@@ -200,7 +200,7 @@ export default function Intro({ onDismiss }: { onDismiss: () => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
                 onClick={dismiss}
-                className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 font-semibold text-ink shadow-lg shadow-accent/20 transition hover:brightness-95"
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 font-semibold text-ink shadow-lg shadow-accent/20 transition hover:brightness-95 sm:mt-9"
               >
                 Enter <ChevronDown size={18} />
               </motion.button>
